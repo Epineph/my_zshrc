@@ -5,6 +5,19 @@ REPO_URL="https://github.com/Epineph/my_zshrc.git"
 INSTALL_DIR="$HOME/zsh_setup"
 ZSHRC_DEST="$HOME/.zshrc"
 ZSH_PROFILE_DEST="$HOME/.zsh_profile"
+LSCOLORS_URL="https://api.github.com/repos/trapd00r/LS_COLORS/tarball/master"
+
+sudo pacman -S --needed jq lsd
+
+# Determine if LSCOLORS is installed
+
+if [[ ! -f "$HOME/.local/share/lscolors.sh" ]]; then
+	mkdir /tmp/LS_COLORS && \
+		curl -L "$LSCOLORS_URL" | tar xzf - \
+		--directory=/tmp/LS_COLORS --strip=1
+	( cd /tmp/LS_COLORS && make install )
+fi
+
 
 # Clone the repository
 git clone "$REPO_URL" "$INSTALL_DIR"
