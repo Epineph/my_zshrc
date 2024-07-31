@@ -1,8 +1,12 @@
 # $HOME/.zsh_profile/zsh_exports.zsh
-
+export TEXMF=/usr/share/texmf-dist/texmf-context
+export BINBIN=/home/heini/bin/bin/bin/
+MYSQLPASSWORD="X;-.+lybD0gd"
+export PYVENV=/home/heini/pyVenv/bin
+export USRBIN=/usr/bin/
 export STACK_BIN=$HOME/.local/bin
 export STACK_COMPlETION=$HOME/.config/bash_completions.d/stack
-
+export LOCAL_BIN=$HOME/.local/bin
 export MINICONDA3_BIN=/home/heini/miniconda3/bin
 export GITHUB_USERNAME=Epineph
 export SWIG_BUILD=/home/heini/repos/swig/build
@@ -27,7 +31,8 @@ export FZF_BIN=$REPOS/fzf/bin
 export NEOVIM_BIN=/usr/bin/nvim
 export BAT_DIR=$REPOS/bat/target/release
 export FD_DIR=$REPOS/fd/target/release
-export PATH=$MINICONDA3_BIN:$HOME/bin/bin:$SWIG_BUILD:$CMAKE_BUILD:$NINJA_BUILD:$RE2C_BUILD:$VCPKG:$NVM_DIR:$ZINIT_HOME:/home/heini/.local/bin:$GEM_DIR:$HOME/.personalBin:$REPOS/vcpkg:$HOME/bin:/usr/local/bin:$HOME/.local/share:$NINJA_DIR:$CARGO_BIN:$FZF_BIN:$BAT_DIR:$FD_DIR:$PATH
+export VARLIB=/var/lib/
+export PATH=$TEXMF:$BINBIN:$PYVENV:$VARLIB:$USRBIN:$LOCAL_BIN:$STACK_BIN:$MINICONDA3_BIN:$HOME/bin/bin:$SWIG_BUILD:$CMAKE_BUILD:$NINJA_BUILD:$RE2C_BUILD:$VCPKG:$NVM_DIR:$ZINIT_HOME:/home/heini/.local/bin:$GEM_DIR:$HOME/.personalBin:$REPOS/vcpkg:$HOME/bin:/usr/local/bin:$HOME/.local/share:$NINJA_DIR:$CARGO_BIN:$FZF_BIN:$BAT_DIR:$FD_DIR:$PATH
 export FZF_DEFAULT_OPTS='--color=bg+:#3F3F3F,bg:#4B4B4B,border:#6B6B6B,spinner:#98BC99,hl:#719872,fg:#D9D9D9,header:#719872,info:#BDBB72,pointer:#E12672,marker:#E17899,fg+:#D9D9D9,preview-bg:#3F3F3F,prompt:#98BEDE,hl+:#98BC99'
 export ZPROFILE=$HOME/.zshrc
 export MANPATH="/usr/local/man:$MANPATH"

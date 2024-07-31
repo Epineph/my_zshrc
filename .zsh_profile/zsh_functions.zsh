@@ -165,7 +165,7 @@ function git_pull_all() {
       cd "${dir}" || return # Change to the directory or exit on failure
             
       # Optionally, checkout a specific branch. Remove or modify as needed.
-      git stash && checkout && git pull
+      git stash && git checkout && git pull
       git config --global --add safe.directory "${dir}"
       # Pull the latest changes
       # git pull
@@ -192,5 +192,7 @@ function fzf_edit() {
 }
 
 function batCat() {
-  bat --style=grid --paging=never $1 
+	sudo "$(which bat)" --style=grid --paging=never $1 
 }
+
+

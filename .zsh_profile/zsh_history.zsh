@@ -1,7 +1,7 @@
 # $HOME/.zsh_profile/zsh_history.zsh
 
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 HISTFILE=~/.zsh_history
 setopt SHARE_HISTORY
 setopt HIST_REDUCE_BLANKS

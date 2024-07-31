@@ -1,6 +1,6 @@
 # $HOME/.zsh_profile/zsh_git.zsh
 
-git_gpg_keyid="6F57C7343E565225007CBA29BB40E812A1BF504E"
+git_gpg_keyid="C582D413C389CFEB7ED7E712C10A9019600780FC"
 
 git config --global user.name "Heini Winther Johnsen"
 git config --global user.email "heiniwinther@hotmail.com"
