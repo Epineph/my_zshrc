@@ -1,5 +1,6 @@
 # $HOME/.zsh_profile/zsh_aliases.zsh
-
+# Ensure custom binaries are available under sudo
+alias sudo='sudo env "PATH=$PATH"'
 alias nvim='sudo nvim'
 alias freshZsh='source $HOME/.zshrc'
 alias editZsh='sudo nano $HOME/.zshrc'

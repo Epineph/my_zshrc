@@ -1,6 +1,13 @@
 # $HOME/.zsh_profile/zsh_exports.zsh
+#export http_proxy=http://192.168.1.254:8080
+#export https_proxy=http://192.168.1.254:8080
+export LESS=X
+export PAGER="bat --style=grid --theme=Dracula --paging=never --color=always --language=bash"
+export PHP_BUILD=/home/heini/bin/lib/php/build/
+export COMPOSER_HOME=$HOME/.config
+export XDG_CONFIG_HOME=$HOME/.config
 export TEXMF=/usr/share/texmf-dist/texmf-context
-export BINBIN=/home/heini/bin/bin/bin/
+export BINBIN=/home/heini/bin/bin/
 MYSQLPASSWORD="X;-.+lybD0gd"
 export PYVENV=/home/heini/pyVenv/bin
 export USRBIN=/usr/bin/
@@ -32,7 +39,7 @@ export NEOVIM_BIN=/usr/bin/nvim
 export BAT_DIR=$REPOS/bat/target/release
 export FD_DIR=$REPOS/fd/target/release
 export VARLIB=/var/lib/
-export PATH=$TEXMF:$BINBIN:$PYVENV:$VARLIB:$USRBIN:$LOCAL_BIN:$STACK_BIN:$MINICONDA3_BIN:$HOME/bin/bin:$SWIG_BUILD:$CMAKE_BUILD:$NINJA_BUILD:$RE2C_BUILD:$VCPKG:$NVM_DIR:$ZINIT_HOME:/home/heini/.local/bin:$GEM_DIR:$HOME/.personalBin:$REPOS/vcpkg:$HOME/bin:/usr/local/bin:$HOME/.local/share:$NINJA_DIR:$CARGO_BIN:$FZF_BIN:$BAT_DIR:$FD_DIR:$PATH
+export PATH=$PHP_BUILD:$COMPOSER_HOME/vendor/bin:$TEXMF:$BINBIN:$PYVENV:$VARLIB:$USRBIN:$LOCAL_BIN:$STACK_BIN:$MINICONDA3_BIN:$HOME/bin/bin:$SWIG_BUILD:$CMAKE_BUILD:$NINJA_BUILD:$RE2C_BUILD:$VCPKG:$NVM_DIR:$ZINIT_HOME:/home/heini/.local/bin:$GEM_DIR:$HOME/.personalBin:$REPOS/vcpkg:$HOME/bin:/usr/local/bin:$HOME/.local/share:$NINJA_DIR:$CARGO_BIN:$FZF_BIN:$BAT_DIR:$FD_DIR:$PATH
 export FZF_DEFAULT_OPTS='--color=bg+:#3F3F3F,bg:#4B4B4B,border:#6B6B6B,spinner:#98BC99,hl:#719872,fg:#D9D9D9,header:#719872,info:#BDBB72,pointer:#E12672,marker:#E17899,fg+:#D9D9D9,preview-bg:#3F3F3F,prompt:#98BEDE,hl+:#98BC99'
 export ZPROFILE=$HOME/.zshrc
 export MANPATH="/usr/local/man:$MANPATH"

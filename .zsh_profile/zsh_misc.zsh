@@ -13,7 +13,7 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-alias bathelp='bat --plain --language=help'
+alias bathelp='bat --plain --language=help --paging=never'
 help() {
     "$@" --help 2>&1 | bathelp
 }
