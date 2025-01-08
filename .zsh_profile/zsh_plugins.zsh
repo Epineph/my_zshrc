@@ -92,4 +92,4 @@ zinit \
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source /home/heini/.local/share/lscolors.sh
+source $HOME/.local/share/lscolors.sh

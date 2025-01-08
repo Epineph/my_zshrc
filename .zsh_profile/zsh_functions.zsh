@@ -1,5 +1,25 @@
 # $HOME/.zsh_profile/zsh_functions.zsh
 
+# Define the function
+## setup root to use vcpkg packages from users $HOME vcpkg repo in addition to installed on system root
+function setup_vcpkg_env() {
+  local vcpkg_root="$HOME/repos/vcpkg"
+  local installed_lib="$vcpkg_root/installed/x64-linux/lib/pkgconfig"
+  local pkg_config_default=$(pkg-config --variable pc_path pkg-config)
+  local combined_path="${pkg_config_default}:${PKG_CONFIG_PATH:+$PKG_CONFIG_PATH:}${installed_lib}"
+
+  # Export environment variables
+  export VCPKG_ROOT="$vcpkg_root"
+  export PATH="$VCPKG_ROOT:$PATH"
+  export CMAKE_PREFIX_PATH="$VCPKG_ROOT/installed"
+  export PKG_CONFIG_PATH="$combined_path"
+  export LD_LIBRARY_PATH="$VCPKG_ROOT/installed/x64-linux/lib:$LD_LIBRARY_PATH"
+}
+
+# Automatically call the function at shell startup
+setup_vcpkg_env
+
+
 function git_push() {
   local commit_message
   local repo_url
@@ -13,7 +33,7 @@ function git_push() {
   echo "Enter the commit message:"
   read -r commit_message
 
-  # Add all changes to the repository
+  # Add all changes to the repositor
   git add .
 
   # Commit the changes with the provided message
@@ -49,7 +69,7 @@ function clone() {
       if [[ $target_dir == "build" ]]; then
         makepkg --syncdeps
       elif [[ $target_dir == "install" ]]; then
-	makepkg -si
+    makepkg -si
       fi
       popd > /dev/null
     else
@@ -88,70 +108,7 @@ function scp_transfer() {
   fi
 }
 
-function check_and_install_packages() {
-  local missing_packages=()
 
-  # Check which packages are not installed
-  for package in "$@"; do
-    if ! pacman -Qi "$package" &> /dev/null; then
-      missing_packages+=("$package")
-    else
-      echo "Package '$package' is already installed."
-    fi
-  done
-
-  # If there are missing packages, ask the user if they want to install them
-  if [ ${#missing_packages[@]} -ne 0 ]; then
-    echo "The following packages are not installed: ${missing_packages[*]}"
-    read -p "Do you want to install them? (Y/n) " -n 1 -r
-    echo    # Move to a new line
-    if [[ $REPLY =~ ^[Yy]$ ]] || [[ -z $REPLY ]]; then
-      for package in "${missing_packages[@]}"; do
-        yes | sudo pacman -S "$package"
-        if [ $? -ne 0 ]; then
-          echo "Failed to install $package. Aborting."
-          exit 1
-        fi
-      done
-    else
-      echo "The following packages are required to continue: ${missing_packages[*]}. Aborting."
-      exit 1
-    fi
-  fi
-}
-
-function check_if_pyEnv_exists() {
-  local my_zshrc_dir=~/.zshrc
-  local my_virtEnv_dir=~/virtualPyEnvs
-  local py_env_name=pyEnv
-  local pkg1=python-virtualenv
-  local pkg2=python-virtualenvwrapper
-  sudo pacman -S --needed --noconfirm $pkg1 $pkg2
-  # Check if the virtual environment directory exists
-  if [ ! -d "$my_virtEnv_dir" ]; then
-    echo "Python Virtualenv and directory doesn't exist, creating it ..."
-    sleep 1
-    mkdir -p $my_virtEnv_dir
-    # Use $1 to check if a custom environment name is provided
-    local env_name=${1:-$py_env_name}
-    echo "Creating virtual environment: $env_name"
-    virtualenv $my_virtEnv_dir/$env_name --system-site-packages --symlinks
-    echo "alias startEnv='source /home/$USER/'virtualPyEnvs/pyEnv/bin/activate" >> ~/.zshrc
-    else
-      echo "Python virtualenv directory exists ..."
-      # Check if the standard pyEnv exists or if a custom name is provided
-      if [ -z "$1" ] && [ -e "$my_virtEnv_dir/$py_env_name/bin/activate" ]; then
-        echo "pyenv directory exists, and no argument, exiting.."
-	sleep 2
-	exit 1
-      else
-        # Create a virtual environment with the provided name or the default one
-	local env_name=${1:-$py_env_name}
-	echo "Creating virtual environment: $env_name"
-	virtualenv $my_virtEnv_dir/$env_name --system-site-packages --symlinks
-      fi
-  fi
-}
 
 function git_pull_all() {
     # Store the current directory
@@ -179,7 +136,7 @@ done
 }
 
 function fzf_edit() {
-  local bat_style='--color=always --line-range :500'
+  local bat_style='--color=always --theme="TwoDark"  --line-range :500'
   if [[ $1 == "no_line_number" ]]; then
     bat_style+=' --style=grid'
   fi
@@ -192,7 +149,6 @@ function fzf_edit() {
 }
 
 function batCat() {
-	sudo "$(which bat)" --style=grid --paging=never $1 
+    sudo "$(which bat)" --style=grid --paging=never $1 
 }
-
 
