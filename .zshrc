@@ -6,5 +6,4 @@ for config_file in $HOME/.zsh_profile/*.zsh; do
 done
 
 
-
 [ -f "/home/heini/.ghcup/env" ] && . "/home/heini/.ghcup/env" # ghcup-env

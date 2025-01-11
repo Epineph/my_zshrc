@@ -142,13 +142,66 @@ function fzf_edit() {
   fi
 
   local file
-  file=$(fd --type f | fzf --preview "bat $bat_style {}" --preview-window=right:60%:wrap)
+  file=$(fd --type f | fzf --preview "bat $bat_style {}" --preview-wind
+ow=right:60%:wrap)
   if [[ -n $file ]]; then
     sudo vim "$file"
   fi
 }
 
-function batCat() {
-    sudo "$(which bat)" --style=grid --paging=never $1 
+
+
+function sshkey-timer() { 
+  usage() {
+    bat --style="grid,header" --paging="never" --color="always" --language="LESS" --theme="Dracula" <<EOF
+Usage: sshkey-timer -t [seconds]
+
+example: sshkey-timer -t 7200  # Sets the SSH key lifetime to 2 hours
+EOF
+  }
+
+  local sshkey_activate
+  local total_seconds=3600  # Default to 1 hour if no -t argument is provided
+  local ssh_key="$HOME/.ssh/id_rsa"
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -t|--time)
+        if [[ -z "$2" ]]; then
+          echo "Error: Missing value for -t|--time argument"
+          usage
+          exit 1
+        fi
+        total_seconds="$2"
+        shift 2
+        ;;
+      --help)
+        usage
+        exit 0
+        ;;
+      *)
+        usage
+        exit 1
+        ;;
+    esac
+    shift
+  done
+
+  # Start ssh-agent with a timeout
+  sshkey_activate=$(eval "$(ssh-agent -t $total_seconds)")
+  echo "$sshkey_activate"
+
+  # Add the specified SSH key
+  if [[ -f "$ssh_key" ]]; then
+      ssh-add "$ssh_key"
+      echo "Added SSH key: $ssh_key"
+  else
+      echo "Error: SSH key not found at $ssh_key"
+      return 1
+  fi
 }
+
+
+
+
 
