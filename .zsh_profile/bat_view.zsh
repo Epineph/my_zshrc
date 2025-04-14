@@ -1,7 +1,7 @@
 # Define a robust 'view' function with bat fallback and customization
 
 view() {
-  local theme="gruvbox-dark"
+  local theme="Monokai Extended Bright"
   local highlight=""
   local file=""
 
@@ -37,11 +37,16 @@ view() {
         --style="grid,header,snip" \
         --squeeze-blank \
         --theme="$theme" \
-        --pager="never" \
+        --pager="less" \
         --decorations="always" \
         --italic-text="always" \
         --color="always" \
-        $highlight \
+        --chop-long-lines \
+        --tabs 2 \
+        --wrap="auto" \
+        --paging="never" \
+        --strip-ansi="always" \
+        $highlight  \
         "$file"
   else
     cat "$file"
