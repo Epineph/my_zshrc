@@ -1,5 +1,5 @@
 # $HOME/.zsh_profile/zsh_git.zsh
-git_gpg_keyid=""
+git_gpg_keyid="D3877098769E23F1B7704154F67CCE941A510F9E"
 git config --global user.signingkey "$git_gpg_keyid"
 git config --global commit.gpgsign true
 git config --global color.ui auto
