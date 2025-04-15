@@ -19,36 +19,6 @@ function setup_vcpkg_env() {
 # Automatically call the function at shell startup
 setup_vcpkg_env
 
-
-function git_push() {
-  local commit_message
-  local repo_url
-  local sanitized_url
-
-  if [ -z "$GITHUB_TOKEN" ]; then
-    echo "Error: GITHUB_TOKEN is not set in your environment."
-    return 1
-  fi
-
-  echo "Enter the commit message:"
-  read -r commit_message
-
-  # Add all changes to the repositor
-  git add .
-
-  # Commit the changes with the provided message
-  git commit -m "$commit_message"
-
-  # Get the repository URL and sanitize it
-  repo_url=$(git config --get remote.origin.url)
-  sanitized_url=$(echo "$repo_url" | sed 's|https://|https://'"$GITHUB_TOKEN"'@|')
-
-  # Push the changes using the personal access token for authentication
-  git push "$sanitized_url" main
-
-  echo "Changes committed and pushed successfully."
-}
-
 function clone() {
   local repo=$1
   local target_dir=$REPOS
@@ -135,73 +105,60 @@ function git_pull_all() {
 done
 }
 
+# fzf_edit - Use fzf to select a file and open it in an editor.
+#
+# This function uses the fzf fuzzy finder to select a file using the fd command.
+# It displays a preview of each file using bat with a custom style.
+#
+# Usage:
+#   fzf_edit [-e|--editor <editor>]
+#
+# Options:
+#   -e, --editor <editor>  Specifies the editor to use.
+#
+# If no editor is specified using the option, the function defaults to the
+# environment variable EDITOR. If EDITOR is not set, it further defaults to "vim".
+#
 function fzf_edit() {
-  local bat_style='--color=always --theme="TwoDark"  --line-range :500'
-  if [[ $1 == "no_line_number" ]]; then
-    bat_style+=' --style=grid'
-  fi
+  # Default editor: use EDITOR if set, otherwise fallback to "vim".
+  local editor="${EDITOR:-vim}"
 
-  local file
-  file=$(fd --type f | fzf --preview "bat $bat_style {}" --preview-wind
-ow=right:60%:wrap)
-  if [[ -n $file ]]; then
-    sudo vim "$file"
-  fi
-}
+  # Define bat preview style options.
+  local bat_style='--style="grid,header,snip" --color=always --theme="Monokai Extended Bright" --squeeze-blank --chop-long-lines --tabs 2 --wrap="auto" --paging="never" --strip-ansi="always" --italic-text="always" --line-range :500'
 
-
-
-function sshkey-timer() { 
-  usage() {
-    bat --style="grid,header" --paging="never" --color="always" --language="LESS" --theme="Dracula" <<EOF
-Usage: sshkey-timer -t [seconds]
-
-example: sshkey-timer -t 7200  # Sets the SSH key lifetime to 2 hours
-EOF
-  }
-
-  local sshkey_activate
-  local total_seconds=3600  # Default to 1 hour if no -t argument is provided
-  local ssh_key="$HOME/.ssh/id_rsa"
-
+  # Option parsing: Check for -e or --editor arguments.
   while [[ $# -gt 0 ]]; do
-    case "$1" in
-      -t|--time)
-        if [[ -z "$2" ]]; then
-          echo "Error: Missing value for -t|--time argument"
-          usage
-          exit 1
+    case $1 in
+      -e|--editor)
+        if [[ -n $2 ]]; then
+          editor="$2"
+          shift 2  # Remove the option and its parameter.
+        else
+          echo "Error: -e|--editor requires an argument." >&2
+          return 1
         fi
-        total_seconds="$2"
-        shift 2
-        ;;
-      --help)
-        usage
-        exit 0
         ;;
       *)
-        usage
-        exit 1
+        echo "Usage: fzf_edit [-e|--editor <editor>]" >&2
+        return 1
         ;;
     esac
-    shift
   done
 
-  # Start ssh-agent with a timeout
-  sshkey_activate=$(eval "$(ssh-agent -t $total_seconds)")
-  echo "$sshkey_activate"
-
-  # Add the specified SSH key
-  if [[ -f "$ssh_key" ]]; then
-      ssh-add "$ssh_key"
-      echo "Added SSH key: $ssh_key"
-  else
-      echo "Error: SSH key not found at $ssh_key"
-      return 1
+  # Use fd to list files and fzf to select one, while previewing with bat.
+  local file
+  file=$(fd --type f | fzf --preview "bat $bat_style {}" --preview-window=right:60%:wrap)
+  
+  # If a file was selected, open it using sudo and the chosen editor.
+  if [[ -n $file ]]; then
+    sudo "$editor" "$file"
   fi
 }
 
 
-
-
-
+# A wrapper function to call git diff with custom delta options
+function dgit_diff() {
+  # Combine git diff with delta options
+  # --side-by-side and --navigate are passed explicitly if not already set in the config file
+  git diff "$@" | delta --side-by-side --navigate
+}

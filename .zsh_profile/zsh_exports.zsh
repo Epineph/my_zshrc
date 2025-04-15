@@ -1,6 +1,7 @@
 # $HOME/.zsh_profile/zsh_exports.zsh
 #export http_proxy=http://192.168.1.254:8080
 #export https_proxy=http://192.168.1.254:8080
+export DELTA_BIN=/home/heini/repos/delta/target/release
 export LESS=X
 export PAGER="bat --style=grid,header --theme="TwoDark" --paging=never --color=always --language=bash"
 export PHP_BUILD=$HOME/bin/lib/php/build/
@@ -37,7 +38,7 @@ export FD_DIR=$REPOS/fd/target/release
 export VARLIB=/var/lib/
 export USR_LOC_BIN=/usr/local/bin
 export DOXYGEN_BUILD=$HOME/repos/doxygen/build
-export PATH=$HOME_BIN:$HOME_BINBIN:$USR_LOC_BIN:$CARGO_BIN:$DOXYGEN_BUILD:$VCPKG:$FZF_BIN:$BAT_DIR:$FD_DIR:$NVM_DIR:$RE2C_BUILD:$NINJA_BUILD:$MINICONDA3_BIN:$CMAKE_BUILD:$PHP_BUILD:$COMPOSER_HOME/vensor/bin:$TEXMF:$LOCAL_BIN:$YARN_DIR:$SWIG_BUILD:$FZF_DIR:$YARN_GLOBAL_FOLDER:$VAR_LIB:$USRBIN:$ZSH:$ZINIT_HOME:$STACK_BIN:$STACK_COMPLETION_BIN:$PHP_BUILD:$COMPOSER_HOME:$PATH
+export PATH=$HOME_BIN:$HOME_BINBIN:$USR_LOC_BIN:$CARGO_BIN:$DELTA_BIN:$DOXYGEN_BUILD:$VCPKG:$FZF_BIN:$BAT_DIR:$FD_DIR:$NVM_DIR:$RE2C_BUILD:$NINJA_BUILD:$MINICONDA3_BIN:$CMAKE_BUILD:$PHP_BUILD:$COMPOSER_HOME/vensor/bin:$TEXMF:$LOCAL_BIN:$YARN_DIR:$SWIG_BUILD:$FZF_DIR:$YARN_GLOBAL_FOLDER:$VAR_LIB:$USRBIN:$ZSH:$ZINIT_HOME:$STACK_BIN:$STACK_COMPLETION_BIN:$PHP_BUILD:$COMPOSER_HOME:/home/heini/repos/libutp:$PATH
 export FZF_DEFAULT_OPTS='--color=bg+:#3F3F3F,bg:#4B4B4B,border:#6B6B6B,spinner:#98BC99,hl:#719872,fg:#D9D9D9,header:#719872,info:#BDBB72,pointer:#E12672,marker:#E17899,fg+:#D9D9D9,preview-bg:#3F3F3F,prompt:#98BEDE,hl+:#98BC99'
 export ZPROFILE=$HOME/.zshrc
 export MANPATH="/usr/local/man:$MANPATH"

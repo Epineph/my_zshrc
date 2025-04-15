@@ -11,9 +11,9 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-alias bathelp='bat --plain --language=help --paging=never'
+alias bathelp='bat --language=help --paging=never --pager="less" --theme="Monokai Extended Bright" --chop-long-lines --squeeze-blank --tabs 2 --wrap="auto" --binary="as-text" --nonprintable-notation="caret" --italic-text="always" --style="grid,header-filename,snip,snip"'
 help() {
     "$@" --help 2>&1 | bathelp
 }
 
-source /etc/profile.d/cuda.sh
+#source /etc/profile.d/cuda.sh

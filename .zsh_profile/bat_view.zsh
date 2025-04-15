@@ -1,8 +1,10 @@
 # Define a robust 'view' function with bat fallback and customization
 
 view() {
+  local bat_style="header,grid"
   local theme="Monokai Extended Bright"
   local highlight=""
+  local linerange=""
   local file=""
 
   # Parse options
@@ -16,6 +18,14 @@ view() {
         highlight="--highlight-line=$2"
         shift 2
         ;;
+      -r|--line-range)
+        linerange="--line-range=$2"
+        shift 2
+        ;;
+      -n|--numbers)
+        bat_style+=',numbers'
+        shift
+        ;;
       -*)
         echo "Unknown option: $1" >&2
         return 1
@@ -26,6 +36,7 @@ view() {
         ;;
     esac
   done
+  echo $bat_style
 
   if [[ -z "$file" ]]; then
     echo "Usage: view [-t theme] [-l line[,line]] <file>" >&2
@@ -34,22 +45,22 @@ view() {
 
   if command -v bat &>/dev/null; then
     bat --set-terminal-title \
-        --style="grid,header,snip" \
+        --style="$bat_style" \
         --squeeze-blank \
         --theme="$theme" \
         --pager="less" \
         --decorations="always" \
         --italic-text="always" \
         --color="always" \
-        --chop-long-lines \
+        --terminal-width="-1" \
         --tabs 2 \
         --wrap="auto" \
         --paging="never" \
         --strip-ansi="always" \
         $highlight  \
+        $linerange \
         "$file"
   else
     cat "$file"
   fi
 }
-
