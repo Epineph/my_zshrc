@@ -1,0 +1,10 @@
+# $HOME/.zsh_profile/zsh_history.zsh
+
+HISTSIZE=100000
+SAVEHIST=100000
+HISTFILE=~/.zsh_history
+setopt SHARE_HISTORY
+setopt HIST_REDUCE_BLANKS
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_DUPS
