@@ -1,0 +1,54 @@
+# $HOME/.zsh_profile/zsh_exports.zsh
+#export http_proxy=http://192.168.1.254:8080
+#export https_proxy=http://192.168.1.254:8080
+#export $HOME/repos/ant/dist/bin
+export PHPCS_BIN=/home/heini/repos/PHP_CodeSniffer/bin
+export ANT_HOME=/home/heini/repos/ant/dist/bin
+export JAVA_HOME="$(archlinux-java get)"
+export DELTA_BIN=$HOME/repos/delta/target/release
+export LESS='-RFX'   # -F quits if content fits on one screen, -X keeps content visible
+export PAGER="bat --style=grid,header --theme="TwoDark" --paging=never --color=always --language=bash"
+export PHP_BUILD=$HOME/bin/lib/php/build/
+export COMPOSER_HOME=$HOME/.config
+export XDG_CONFIG_HOME=$HOME/.config
+export TEXMF=/usr/share/texmf-dist/texmf-context
+export HOME_BINBIN=$HOME/bin/bin/
+export HOME_BIN=$HOME/bin
+export USRBIN=/usr/bin/
+export STACK_BIN=$HOME/.local/bin
+export STACK_COMPlETION=$HOME/.config/bash_completions.d/stack
+export LOCAL_BIN=$HOME/.local/bin
+export MINICONDA3_BIN=$HOME/miniconda3/bin
+export GITHUB_USERNAME=Epineph
+export SWIG_BUILD=$HOME/repos/swig/build
+export CMAKE_BUILD=$HOME/repos/CMake/build
+export NINJA_BUILD=$HOME/repos/ninja/build
+export RE2C_BUILD=$HOME/repos/re2c/build
+export VCPKG=$HOME/repos/vcpkg
+export ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share/zinit}"
+export GEM_DIR=$HOME/.local/share/gem/ruby/3.0.0/bin
+export CARGO_BIN=$HOME/.cargo/bin
+export REPOS=$HOME/repos
+export ZSH="$HOME/.oh-my-zsh"
+export NVM_DIR=$HOME/.nvm
+export FZF_DIR=$HOME/.fzf
+export EMACS_LISP=$HOME/.emacs.d/lisp/
+export YARN_DIR=$HOME/.yarn
+export YARN_GLOBAL_FOLDER=$YARN_DIR/global_packages
+export NINJA_DIR=$REPOS/ninja/build
+export CARGO_BIN=$HOME/.cargo/bin
+export FZF_BIN=$REPOS/fzf/bin
+export FD_DIR=$REPOS/fd/target/release
+export VARLIB=/var/lib/
+export USR_LOC_BIN=/usr/local/bin
+export DOXYGEN_BUILD=$HOME/repos/doxygen/build
+export PATH=$HOME_BIN:$HOME_BINBIN:$ANT_HOME:/home/heini/.cargo/bin/:$USR_LOC_BIN:/home/heini/repos/bat:$CARGO_BIN:PHP_$JAVA_HOME/bin:$DELTA_BIN:$DOXYGEN_BUILD:$VCPKG:$FZF_BIN:$BAT_DIR:$FD_DIR:$NVM_DIR:$RE2C_BUILD:$NINJA_BUILD:$MINICONDA3_BIN:$CMAKE_BUILD:$PHPCS_BIN:$COMPOSER_HOME/vensor/bin:$TEXMF:$LOCAL_BIN:$YARN_DIR:$SWIG_BUILD:$FZF_DIR:$YARN_GLOBAL_FOLDER:$VAR_LIB:$USRBIN:$ZSH:$ZINIT_HOME:$STACK_BIN:$STACK_COMPLETION_BIN:$PHP_BUILD:$COMPOSER_HOME:/home/heini/repos/libutp:$PATH
+export FZF_DEFAULT_OPTS='--color=bg+:#3F3F3F,bg:#4B4B4B,border:#6B6B6B,spinner:#98BC99,hl:#719872,fg:#D9D9D9,header:#719872,info:#BDBB72,pointer:#E12672,marker:#E17899,fg+:#D9D9D9,preview-bg:#3F3F3F,prompt:#98BEDE,hl+:#98BC99'
+export ZPROFILE=$HOME/.zshrc
+export MANPATH="/usr/local/man:$MANPATH"
+export LANG=en_DK.UTF-8
+export LANGUAGE=en_DK.UTF-8
+export GPG_TTY=$(tty)
+export host1=$(getip)
+export RUSTONIG_SYSTEM_LIBONIG=1
+
